@@ -161,6 +161,9 @@ The game ends when all boxes on the board have been completed. The player with t
 **Q: What if I make an invalid move?**
 - A: The game will prompt you to make a valid move instead.
 
+### Understanding the Implementation
+To understand the logic behind the implementation of the game, refer to the detailed explanations and code snippets provided in the Jupyter Notebook: Overview_Understanding.ipynb.
+
 ## Contributing
 
 ### Guidelines
