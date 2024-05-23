@@ -1,8 +1,6 @@
 ```markdown
 # Dots and Boxes
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-
 ## Introduction
 
 Dots and Boxes is a classic pencil-and-paper game for two players. Players take turns drawing lines between dots on a grid, aiming to complete boxes. The player who completes the most boxes wins.
