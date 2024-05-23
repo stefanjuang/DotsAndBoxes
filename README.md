@@ -34,7 +34,7 @@ Dots and Boxes is a classic pencil-and-paper game for two players. Players take 
 ### Examples
 1. Initialize the game:
    ```python
-   from dots_and_boxes import DotsAndBoxes
+   from DotsAndBoxes import DotsAndBoxes
    game = DotsAndBoxes(5, 5)
    game.display()
    ```
