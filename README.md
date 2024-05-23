@@ -150,12 +150,6 @@ The game ends when all boxes on the board have been completed. The player with t
    - The box at (0, 0) is completed.
    - Player 2 scores 1 point and takes another turn.
 
-### Advanced Rules
-
-For a more challenging game, you can:
-- Use a larger grid to increase the game's complexity.
-- Implement time limits for each player's turn to add a strategic element.
-
 ### FAQs
 
 **Q: What happens if two players draw lines that do not complete a box?**
@@ -180,4 +174,3 @@ For a more challenging game, you can:
 ## Acknowledgments
 
 - The inspiration for this project comes from the classic game Dots and Boxes.
-- Thanks to all contributors who helped improve this project.
