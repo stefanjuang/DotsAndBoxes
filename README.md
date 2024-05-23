@@ -57,7 +57,7 @@ Dots and Boxes is a classic pencil-and-paper game for two players. Players take 
    ```
 
 ### Screenshots
-![Game Board](./Screenshots.png)
+![Game Board](./Screenshot.png)
 
 ## Configuration
 
