@@ -50,7 +50,7 @@ Dots and Boxes is a classic pencil-and-paper game for two players. Players take 
    game.reset()
    game.display()
    ```
-4. Test cases included in second half of DotsAndBoxes.py
+4. 14 Test cases included in second half of DotsAndBoxes.py
 
 ### Screenshots of Test Case 1
 ![Game Board](./Screenshot.png)
