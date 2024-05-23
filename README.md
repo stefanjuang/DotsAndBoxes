@@ -11,12 +11,9 @@ Dots and Boxes is a classic pencil-and-paper game for two players. Players take 
 3. [Configuration](#configuration)
 4. [Game Rules](#game-rules)
 5. [Contributing](#contributing)
-6. [License](#license)
-7. [Contact Information](#contact-information)
-8. [Acknowledgments](#acknowledgments)
 
 ## Installation
-
+- None
 ### Prerequisites
 - Python 3.x
 
