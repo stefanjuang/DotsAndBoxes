@@ -1,180 +1,48 @@
-```markdown
 # Dots and Boxes
 
-## Introduction
+A dependency-free Python implementation of the two-player pencil-and-paper game, with move validation, box ownership, scoring, turn handling, and terminal output.
 
-Dots and Boxes is a classic pencil-and-paper game for two players. Players take turns drawing lines between dots on a grid, aiming to complete boxes. The player who completes the most boxes wins.
+## Quick start
 
-## Table of Contents
-1. [Installation](#installation)
-2. [Usage](#usage)
-3. [Configuration](#configuration)
-4. [Game Rules](#game-rules)
-5. [Contributing](#contributing)
-
-## Installation
-- None
-### Prerequisites
-- Python 3.x
-
-### Steps
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/stefanjuang/DotsAndBoxes.git
-   cd DotsAndBoxes
-   ```
-2. (Optional) Create a virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-   ```
-
-## Usage
-
-### Examples
-1. Initialize the game:
-   ```python
-   from DotsAndBoxes import DotsAndBoxes
-   game = DotsAndBoxes(5, 5)
-   game.display()
-   ```
-
-2. Draw a line:
-   ```python
-   game.draw_line((0, 0), (0, 1))
-   game.display()
-   ```
-
-3. Reset the game:
-   ```python
-   game.reset()
-   game.display()
-   ```
-4. 14 Test cases included in second half of DotsAndBoxes.py
-
-### Screenshots of Test Case 1
-![Game Board](./Screenshot1.png)
-
-## Configuration
-
-You can configure the game board by setting the number of rows and columns when initializing the `DotsAndBoxes` class.
-
-```python
-game = DotsAndBoxes(rows, cols)
+```bash
+git clone https://github.com/stefanjuang/DotsAndBoxes.git
+cd DotsAndBoxes
+python DotsAndBoxes.py
 ```
 
-## Game Rules
+This runs the bundled self-tests. No third-party packages are required.
 
-### Introduction
+To use the game from Python:
 
-Welcome to Dots and Boxes! This is a classic pencil-and-paper game for two players. Players take turns drawing lines between dots on a grid, aiming to complete boxes. The player who completes the most boxes wins.
+```python
+from DotsAndBoxes import DotsAndBoxes
 
-### Components
+game = DotsAndBoxes(3, 3)  # 3 × 3 dots, giving 2 × 2 boxes
+game.draw_line((0, 0), (0, 1))
+game.display()
+```
 
-- **Game Board**: A grid of dots.
-- **Lines**: Horizontal and vertical lines that can be drawn between dots.
-- **Boxes**: The squares formed by drawing lines between dots.
-- **Players**: Two players, each trying to complete more boxes than the other.
-- **Scores**: Keeps track of each player's score.
+Coordinates are zero-based `(row, column)` tuples. Use positive integer dimensions of at least 2 in each direction; constructor validation is not implemented.
 
-### Setup
+## Game behavior
 
-1. **Initialize the Game**:
-   - The game board is created with a specified number of rows and columns.
-   - Each cell in the grid represents a potential box.
-   
-2. **Reset the Game**:
-   - All lines are removed, and the game is reset to its initial state.
-   - Scores for both players are set to zero.
-   - Player 1 starts the game.
+- A move joins two horizontally or vertically adjacent dots.
+- Duplicate, diagonal, out-of-bounds, malformed, and non-adjacent moves are rejected.
+- Completing a box adds one point and keeps the current player's turn. One edge can complete two boxes.
+- A valid move that completes no box passes the turn.
+- `draw_line` returns `True` when a box is completed. It returns `False` both for an invalid move and for a valid move that passes the turn.
+- `reset()` clears the board and scores. `is_game_over()` checks whether every box is owned, and `get_winner()` returns player 1, player 2, or `None` for a tie.
 
-### Gameplay
+![Terminal board example](Screenshot1.png)
 
-#### Turn Structure
+## Code and tests
 
-On your turn, you will:
-1. **Draw a Line**: 
-   - Select two adjacent dots and draw a line between them (either horizontal or vertical).
-   
-2. **Check for Completed Boxes**:
-   - If drawing the line completes one or more boxes, you score points for each completed box and get another turn.
-   - If no boxes are completed, it becomes the other player's turn.
+[DotsAndBoxes.py](DotsAndBoxes.py) contains the game and `run_tests()`. The bundled runner includes 13 named scenarios, numbered 1–9 and 11–14, covering normal moves, invalid input, scoring, player changes, game completion, and a two-box move.
 
-#### Actions
+The script completed successfully on Python 3.12.14 during the documentation review. Some scenarios exercise a path without asserting its postconditions, so this is a small self-test suite rather than exhaustive correctness coverage.
 
-1. **Draw a Line**:
-   - Lines can only be drawn between two adjacent dots.
-   - Lines can be horizontal or vertical.
-   - A line cannot be drawn if it is already present.
+[Overview_Understanding.ipynb](Overview_Understanding.ipynb) provides an implementation walkthrough.
 
-2. **Score Points**:
-   - Completing a box earns you a point.
-   - The box is marked with your player number (1 or 2).
+## Scope
 
-#### Special Rules
-
-- If a line completes any box, the current player gets another turn.
-- The game continues until all possible lines are drawn and all boxes are completed.
-
-### Winning the Game
-
-The game ends when all boxes on the board have been completed. The player with the most completed boxes (and thus the highest score) wins the game. If both players have the same score, the game ends in a tie.
-
-### Examples
-
-#### Example Turn
-
-1. **Player 1's Turn**:
-   - Player 1 chooses to draw a line from (0, 0) to (0, 1).
-   - The line is drawn, but no boxes are completed.
-   - It becomes Player 2's turn.
-
-2. **Player 2's Turn**:
-   - Player 2 draws a line from (1, 0) to (1, 1).
-   - The line is drawn, completing a box.
-   - Player 2 scores 1 point and takes another turn.
-
-3. **Next Turn**:
-   - Player 2 draws another line from (1, 1) to (1, 2).
-   - No boxes are completed, so it becomes Player 1's turn.
-
-#### Completed Box Scenario
-
-1. **Setup**:
-   - Player 1 has drawn lines forming three sides of a box:
-     - Line from (0, 0) to (0, 1)
-     - Line from (0, 1) to (1, 1)
-     - Line from (1, 1) to (1, 0)
-
-2. **Action**:
-   - Player 2 draws the fourth line from (0, 0) to (1, 0).
-   - The box at (0, 0) is completed.
-   - Player 2 scores 1 point and takes another turn.
-
-### FAQs
-
-**Q: What happens if two players draw lines that do not complete a box?**
-- A: The turn simply passes to the next player without any points being scored.
-
-**Q: Can I draw a line that is not adjacent to any existing lines?**
-- A: No, lines must be drawn between two adjacent dots only.
-
-**Q: What if I make an invalid move?**
-- A: The game will prompt you to make a valid move instead.
-
-### Understanding the Implementation
-To understand the logic behind the implementation of the game, refer to the detailed explanations and code snippets provided in the Jupyter Notebook: ./Overview_Understanding.ipynb.
-
-## Contributing
-
-### Guidelines
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes.
-4. Commit your changes (`git commit -am 'Add new feature'`).
-5. Push to the branch (`git push origin feature-branch`).
-6. Create a new Pull Request.
-
-## Acknowledgments
-
-- The inspiration for this project comes from the classic game Dots and Boxes.
+This is a terminal-oriented game-logic example, not an interactive command-line game, GUI, or AI opponent. Methods print diagnostic output. The core module can be imported without running the self-tests; run the file directly or call `run_tests()` to execute them.
