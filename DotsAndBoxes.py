@@ -369,4 +369,5 @@ def run_tests():
     print("Test 14 passed")
     print("-" * 40)
 
-run_tests()
+if __name__ == "__main__":
+    run_tests()
